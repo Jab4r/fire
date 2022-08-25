@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+</head>
+
+<body>
+
+
+
+            <div id="firebaseui-auth-container"></div>
+
+
+
+
+        <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth__ar.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+        <script>
+            const firebaseConfig = {
+            apiKey: "AIzaSyA8vsQnje4srJR00mqHHceBMi-kT-dfpz0",
+            authDomain: "login-system-93838.firebaseapp.com",
+            projectId: "login-system-93838",
+            storageBucket: "login-system-93838.appspot.com",
+            messagingSenderId: "548745671548",
+            appId: "1:548745671548:web:4eb7925b8959c77a636af9"
+            };    
+          firebase.initializeApp(firebaseConfig);
+
+
+
+          const uiConfig = {}
+                    
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+            ui.start('#firebaseui-auth-container', {
+            signInFlow: 'popup',
+            signInSuccessUrl: 'hello',
+            signInOptions: [
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                // {
+                // provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                // signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+                // }
+            ],
+            // Other config options...
+            });
+
+            // Is there an email link sign-in?
+            if (ui.isPendingRedirect()) {
+            ui.start('#firebaseui-auth-container', uiConfig);
+            }
+            // This can also be done via:
+            if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+            ui.start('#firebaseui-auth-container', uiConfig);
+            }
+
+
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+
+        </script>
+
+
+</body>
+
+</html>
